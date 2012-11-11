@@ -1,0 +1,28 @@
+<h1>Listing hacks</h1>
+
+<table>
+<%= @hacks.each do |hack| %>
+    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+
+        <td class="list_description">
+            <dl>
+                <dt><%= hack.title %></dt>
+                <dd><%= hack.hackers %></dd>
+                <dd><%= hack.gen %></dd>
+            </dl>
+        </td>
+        
+        <td class="list_actions">
+            <%= link_to 'Show', hack %><br />
+            <%= link_to 'Edit', edit_hack_path(hack) %><br />
+            <%= link_to 'Destroy', hack,
+                        confirm: 'Are you sure?',
+                        method: :delete %>
+        </td>
+    </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New hack', new_hack_path %>
