@@ -9,3 +9,8 @@ two:
   title: MyString
   hackers: MyText
   gen: false
+
+iphone:
+  title: iphone5
+  hackers: steve_jobs
+  gen: false

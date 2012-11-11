@@ -3,6 +3,11 @@ require 'test_helper'
 class HacksControllerTest < ActionController::TestCase
   setup do
     @hack = hacks(:one)
+    @update = {
+      title: 'test',
+      hackers: 'Billie Jean',
+      gen: true
+    }
   end
 
   test "should get index" do
@@ -18,7 +23,7 @@ class HacksControllerTest < ActionController::TestCase
 
   test "should create hack" do
     assert_difference('Hack.count') do
-      post :create, hack: { gen: @hack.gen, hackers: @hack.hackers, title: @hack.title }
+      post :create, hack: @update
     end
 
     assert_redirected_to hack_path(assigns(:hack))
@@ -35,7 +40,7 @@ class HacksControllerTest < ActionController::TestCase
   end
 
   test "should update hack" do
-    put :update, id: @hack, hack: { gen: @hack.gen, hackers: @hack.hackers, title: @hack.title }
+    put :update, id: @hack, hack: @update
     assert_redirected_to hack_path(assigns(:hack))
   end
 
