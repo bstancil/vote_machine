@@ -1,4 +1,6 @@
 VoteMachine::Application.routes.draw do
+  get "booth/index"
+
   resources :hacks
 
   # The priority is based upon order of creation:
@@ -50,7 +52,7 @@ VoteMachine::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root to: 'booth#index', as: 'booth'
 
   # See how all your routes lay out with "rake routes"
 
