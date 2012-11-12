@@ -1,4 +1,6 @@
 VoteMachine::Application.routes.draw do
+  resources :voters
+
   get "booth/index"
 
   resources :hacks
