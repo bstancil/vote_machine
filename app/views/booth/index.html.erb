@@ -1,0 +1,14 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+<h1>Voting Booth</h1>
+
+<% @hacks.each do |hack| %>
+    <div class = "entry">
+        <h3><%= hack.title %></h3>
+        <%= sanitize(hack.hackers) %>
+    </div>
+<% end %>
+    
+    
