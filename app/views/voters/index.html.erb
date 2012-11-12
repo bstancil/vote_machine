@@ -1,5 +1,8 @@
 <h1>Listing voters</h1>
-
+  <% if notice %>
+  <p id="notice"><%= notice %></p>
+  <% end %>
+  
 <table>
   <tr>
     <th>Name</th>
@@ -9,7 +12,7 @@
     <th></th>
   </tr>
 
-<% @voters.each do |voter| %>
+<% @voter.each do |voter| %>
   <tr>
     <td><%= voter.name %></td>
     <td><%= voter.department %></td>

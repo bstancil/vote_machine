@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  voter_id: 1
+  hack_id: 1
+  height: 1
+  width: 1
+
+two:
+  voter_id: 1
+  hack_id: 1
+  height: 1
+  width: 1

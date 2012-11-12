@@ -2,10 +2,10 @@ class VotersController < ApplicationController
   # GET /voters
   # GET /voters.json
   def index
-    @voters = Voter.all
+    @voter = Voter.order(:name)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html #index.html.erb
       format.json { render json: @voters }
     end
   end
@@ -39,12 +39,13 @@ class VotersController < ApplicationController
 
   # POST /voters
   # POST /voters.json
+  
   def create
     @voter = Voter.new(params[:voter])
 
     respond_to do |format|
       if @voter.save
-        format.html { redirect_to @voter, notice: 'Voter was successfully created.' }
+        format.html { redirect_to voters_url, notice: "Voter #{@voter.name} was successfully created." }
         format.json { render json: @voter, status: :created, location: @voter }
       else
         format.html { render action: "new" }

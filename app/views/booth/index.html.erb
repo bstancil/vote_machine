@@ -8,6 +8,8 @@
     <div class = "entry">
         <h3><%= hack.title %></h3>
         <%= sanitize(hack.hackers) %>
+        <%= button_to 'Vote Up!', votes_path(hack_id: hack) %>
+        <%= button_to 'Vote Down!', votes_path(hack_id: hack) %>
     </div>
 <% end %>
     

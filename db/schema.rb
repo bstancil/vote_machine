@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112022432) do
+ActiveRecord::Schema.define(:version => 20121112025553) do
 
   create_table "hacks", :force => true do |t|
     t.string   "title"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(:version => 20121112022432) do
     t.string   "department"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "voter_id"
+    t.integer  "hack_id"
+    t.integer  "height"
+    t.integer  "width"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "type"
   end
 
 end

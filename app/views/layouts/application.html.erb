@@ -9,7 +9,18 @@
 <body>
 <body class ='<%= controller.controller_name %>'>
 
-<%= yield %>
-
+  <div id="banner">
+    <%= @page_title || "Arbitrary, Corrupt, and Data-Driven" %>
+  </div>
+  <div id="columns">
+    <div id="side">
+      <ul>
+        <li><%= link_to "Voting Booth", booth_index_path %> </li>
+      </ul>
+    </div>
+    <div id="main">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>
