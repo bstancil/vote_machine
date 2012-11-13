@@ -7,9 +7,20 @@
 <% @hacks.each do |hack| %>
     <div class = "entry">
         <h3><%= hack.title %></h3>
-        <%= sanitize(hack.hackers) %>
-        <%= button_to 'Vote Up!', votes_path(hack_id: hack) %>
-        <%= button_to 'Vote Down!', votes_path(hack_id: hack) %>
+        <ul>
+            <li><strong>Total: <%= hack.total_score %></strong></li>
+            <li>Department
+                <ul>
+                    <% @departments.each do |department| %>
+                    <li><%= department %>: <%= hack.department_votes(department) %></li>
+                    <% end %>
+                </ul>
+            <li>Active?: <%= hack.active_hack %></li>
+            <li>Hack gen: <%= hack.gen %></li>
+            <li>Hackers: <%= sanitize(hack.hackers) %></li>
+            <%= button_to 'Vote Up!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: 1) %>
+            <%= button_to 'Vote Down!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: -1) %>
+        
     </div>
 <% end %>
     

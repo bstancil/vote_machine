@@ -1,0 +1,27 @@
+<h1>Here are all the things</h1>
+
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+<% @hacks.each do |hack| %>
+    <div class = "entry">
+        <h3><%= hack.title %></h3>
+        <ul>
+            <li><strong>Votes: <%= hack.total_score %></strong></li>
+            <% @departments.each do |department| %>
+            <li><%= department %>: <%= hack.department_votes(department) %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+<% @voters.each do |voter| %>
+    <div class = "entry">
+        <h3><%= voter.name %></h3>
+        <ul>
+            <li><strong>Votes: <%= voter.total_votes %></strong>, <%= voter.gen_score(true) %>, <%= voter.gen_score(false) %></li>
+        </ul>
+    </div>
+<% end %>
+

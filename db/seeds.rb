@@ -10,11 +10,15 @@ Hack.delete_all
 
 Hack.create(title: 'iPhone App',
             hackers: "Bob, Mike",
-            gen: false)
+            gen: false,
+            active_hack: false)
+            
 Hack.create(title: 'Voter App',
             hackers: "Benn, Stacy",
-            gen: true)
+            gen: true,
+            active_hack: false)
 
 Hack.create(title: 'Data Export',
             hackers: "Derek",
-            gen: false)
+            gen: false,
+            active_hack: true)

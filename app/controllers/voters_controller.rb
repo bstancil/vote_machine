@@ -1,8 +1,10 @@
 class VotersController < ApplicationController
+# skip_before_filter :authorize
+
   # GET /voters
   # GET /voters.json
   def index
-    @voter = Voter.order(:name)
+    @voters = Voter.order(:name)
 
     respond_to do |format|
       format.html #index.html.erb
@@ -21,11 +23,13 @@ class VotersController < ApplicationController
     end
   end
 
+
   # GET /voters/new
   # GET /voters/new.json
   def new
     @voter = Voter.new
-
+    @department = params[:department]
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @voter }
@@ -61,7 +65,7 @@ class VotersController < ApplicationController
 
     respond_to do |format|
       if @voter.update_attributes(params[:voter])
-        format.html { redirect_to @voter, notice: 'Voter was successfully updated.' }
+        format.html { redirect_to voters_url, notice: "Voter #{@voter.name} was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -42,11 +42,11 @@ class VotesController < ApplicationController
   def create
     @voter = current_voter
     hack = Hack.find(params[:hack_id])
-    @vote = @voter.votes.build(hack: hack)
+    @vote = @voter.votes.build(hack: hack, direction: params[:direction], gen: hack.gen, department: @voter.department)
 
     respond_to do |format|
       if @vote.save
-        format.html { redirect_to @vote, notice: 'Vote was successfully created.' }
+        format.html { redirect_to booth_index_url}
         format.json { render json: @vote, status: :created, location: @vote }
       else
         format.html { render action: "new" }

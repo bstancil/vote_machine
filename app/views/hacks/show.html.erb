@@ -10,10 +10,24 @@
   <%= @hack.hackers %>
 </p>
 
-<p>
-  <b>Gen:</b>
-  <%= @hack.gen %>
-</p>
+<div class = "entry">
+    <ul>
+        <li>Current Score: <%= @hack.total_score %></li>
+        <li>Department Scores</li>
+        <ul>
+            <% @departments.each do |department| %>
+            <li><%= department %>: <%= @hack.department_votes(department) %></li>
+            <% end %>
+        </ul>
+    
+    </ul>
+
+    <%= button_to 'Vote Up!', votes_path(hack_id: @hack, gen: @hack, department: @hack, direction: 1) %>
+    <%= button_to 'Vote Down!', votes_path(hack_id: @hack, gen: @hack, department: @hack, direction: -1) %>
+    
+
+    
+</div>
 
 <%= link_to 'Edit', edit_hack_path(@hack) %> |
 <%= link_to 'Back', hacks_path %>

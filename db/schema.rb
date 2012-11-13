@@ -11,31 +11,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112025553) do
+ActiveRecord::Schema.define(:version => 20121113082751) do
 
   create_table "hacks", :force => true do |t|
     t.string   "title"
     t.text     "hackers"
     t.boolean  "gen"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.boolean  "active_hack"
   end
 
   create_table "voters", :force => true do |t|
     t.string   "name"
     t.string   "department"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "password_digest"
   end
 
   create_table "votes", :force => true do |t|
     t.integer  "voter_id"
     t.integer  "hack_id"
+    t.integer  "type"
     t.integer  "height"
     t.integer  "width"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "type"
+    t.integer  "direction"
+    t.string   "department"
+    t.boolean  "gen"
   end
 
 end

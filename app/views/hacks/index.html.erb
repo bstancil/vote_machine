@@ -6,9 +6,10 @@
 
         <td class="list_description">
             <dl>
-                <dt><%= hack.title %></dt>
-                <dd><%= hack.hackers %></dd>
-                <dd><%= hack.gen %></dd>
+                <dt>Title: <%= hack.title %></dt>
+                <dd>Hackers: <%= hack.hackers %></dd>
+                <dd>Gen: <%= hack.gen %></dd>
+                <dd>Active Hack:<%= hack.active_hack %></dd>
             </dl>
         </td>
         
@@ -18,6 +19,7 @@
             <%= link_to 'Destroy', hack,
                         confirm: 'Are you sure?',
                         method: :delete %>
+            <%= link_to 'Make Active', hacks_path %>
         </td>
     </tr>
 <% end %>

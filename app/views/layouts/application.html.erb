@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Arbitrary, Corrupt, and Data Driven</title>
+  <title>Green</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -10,12 +10,20 @@
 <body class ='<%= controller.controller_name %>'>
 
   <div id="banner">
-    <%= @page_title || "Arbitrary, Corrupt, and Data-Driven" %>
+    <%= @page_title || "Green" %>
   </div>
   <div id="columns">
     <div id="side">
       <ul>
+        <li><%= link_to "Login", sessions_create_url %></li>
+        <li>You are logged in as <%= session[:voter_id] %>.</li>
+        <li>You are logged in as <%= session[:name] %>.</li>
         <li><%= link_to "Voting Booth", booth_index_path %> </li>
+        <li><%= link_to "Admin View", admin_index_path %> </li>
+        <li><%= link_to "Votes", votes_path %></li>
+        <li><%= link_to "Hacks", hacks_path %></li>
+        <li><%= link_to "Voters", voters_path %></li>
+        <li><%= link_to "Logout", sessions_destroy_url %></li>
       </ul>
     </div>
     <div id="main">

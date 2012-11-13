@@ -1,3 +1,5 @@
+<div>
+
 <%= form_for(@voter) do |f| %>
   <% if @voter.errors.any? %>
     <div id="error_explanation">
@@ -11,15 +13,42 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :department %><br />
-    <%= f.text_field :department %>
-  </div>
-  <div class="actions">
+<fieldset>
+<legend>Enter Voter Details</legend>
+
+<div>
+    <%= f.label :name %>:
+    <%= f.text_field :name, size: 40 %>
+</div>
+
+<div class = ''>
+    <%= f.label :department %>:<br />
+    <%= f.radio_button :department, 'Analytics' %>
+    <%= label_tag :department, 'Analytics' %><br />
+    <%= f.radio_button :department, 'Rails Team' %>
+    <%= label_tag :department, 'Rails Team' %><br />
+    <%= f.radio_button :department, 'WEB TEAM' %>
+    <%= label_tag :department, 'WEB TEAM' %><br />
+    <%= f.radio_button :department, 'Clients' %>
+    <%= label_tag :department, 'Clients' %><br />
+    <%= f.radio_button :department, 'Core Services' %>
+    <%= label_tag :department, 'Core Services' %><br />
+    <%= f.radio_button :department, 'Infrastructure' %>
+    <%= label_tag :department, 'Infrastructure' %><br />
+    <%= f.radio_button :department, 'Other' %>
+    <%= label_tag :department, 'Other' %><br />
+    <%= f.radio_button :department, 'Product' %>
+    <%= label_tag :department, 'Product' %><br />
+    <%= f.radio_button :department, 'UX' %>
+    <%= label_tag :department, 'UX' %>
+    </div>
+  
+</div>
+
+<div>
     <%= f.submit %>
-  </div>
+</div>
+
+</fieldset>
 <% end %>
+</div>

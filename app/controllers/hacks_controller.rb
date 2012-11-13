@@ -14,9 +14,10 @@ class HacksController < ApplicationController
   # GET /hacks/1.json
   def show
     @hack = Hack.find(params[:id])
+    @departments = ['Analytics','Rails','WEB TEAM','Clients','Core Services','Infrastructure','Other','Product','UX']
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.erb}
       format.json { render json: @hack }
     end
   end
@@ -25,6 +26,7 @@ class HacksController < ApplicationController
   # GET /hacks/new.json
   def new
     @hack = Hack.new
+    Hack.all_false_instead_of(@hack)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +43,7 @@ class HacksController < ApplicationController
   # POST /hacks.json
   def create
     @hack = Hack.new(params[:hack])
+    Hack.all_false_instead_of(@hack)
 
     respond_to do |format|
       if @hack.save
@@ -57,6 +60,7 @@ class HacksController < ApplicationController
   # PUT /hacks/1.json
   def update
     @hack = Hack.find(params[:id])
+    Hack.all_false_instead_of(@hack)
 
     respond_to do |format|
       if @hack.update_attributes(params[:hack])
@@ -80,4 +84,21 @@ class HacksController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def activate
+    @hack = Hack.find(params[:id])
+    Hack.all_false_instead_of(@hack)
+
+    respond_to do |format|
+      if @hack.update_attributes(params[:hack])
+        Hack.all_false_instead_of(@hack)
+        format.html { redirect_to hacks_path, notice: 'Hack was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @hack.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
 end
