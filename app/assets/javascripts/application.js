@@ -15,4 +15,4 @@
 //= require jquery_ujs
 // require_tree .
 
-//= require visualizie/manifests/viz.js
+//= require vizjs
