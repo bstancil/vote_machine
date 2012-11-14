@@ -4,7 +4,7 @@ class HacksController < ApplicationController
   # GET /hacks
   # GET /hacks.json
   def index
-    @hacks = Hack.all
+    @hacks = Hack.order("created_at")
 
     respond_to do |format|
       format.html # index.html.erb
