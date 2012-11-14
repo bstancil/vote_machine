@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113082751) do
+ActiveRecord::Schema.define(:version => 20121114162641) do
 
   create_table "hacks", :force => true do |t|
     t.string   "title"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(:version => 20121113082751) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.boolean  "active_hack"
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "voters", :force => true do |t|

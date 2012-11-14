@@ -1,4 +1,6 @@
 class AdminController < ApplicationController
+  before_filter :redirect_to_active_hack
+  
   def index
     
     @hacks = Hack.all

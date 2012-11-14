@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+  before_filter :redirect_to_active_hack, :except => [:create]
+  
   # GET /votes
   # GET /votes.json
   def index

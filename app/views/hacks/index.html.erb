@@ -1,26 +1,34 @@
 <h1>Listing hacks</h1>
 
 <table>
+    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+        <td>Title</td>
+        <td>Hackers</td>
+        <td>Gen</td>
+        <td>Active</td>
+        <td>Start</td>
+        <td>End</td>
+        <td>Show</td>
+        <td>Edit</td>
+        <td>Destroy</td>
+        <td>Start</td>
+        <td>End</td>
+    </tr>
 <%= @hacks.each do |hack| %>
     <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
-
-        <td class="list_description">
-            <dl>
-                <dt>Title: <%= hack.title %></dt>
-                <dd>Hackers: <%= hack.hackers %></dd>
-                <dd>Gen: <%= hack.gen %></dd>
-                <dd>Active Hack:<%= hack.active_hack %></dd>
-            </dl>
-        </td>
-        
-        <td class="list_actions">
-            <%= link_to 'Show', hack %><br />
-            <%= link_to 'Edit', edit_hack_path(hack) %><br />
-            <%= link_to 'Destroy', hack,
+        <td><%= hack.title %></td>
+        <td><%= hack.hackers %></td>
+        <td><%= hack.gen %></td>
+        <td><%= hack.active_hack %></td>
+        <td><%= hack.start_time %></td>
+        <td><%= hack.end_time %></td>
+        <td><%= link_to 'Show', hack %></td>
+        <td><%= link_to 'Edit', edit_hack_path(hack) %></td>
+        <td><%= link_to 'Destroy', hack,
                         confirm: 'Are you sure?',
-                        method: :delete %>
-            <%= link_to 'Make Active', hacks_path %>
-        </td>
+                        method: :delete %></td>
+        <td><%= button_to "Start", start_hack_path(hack), confirm: 'Start hack?', :method => :put %></td>
+        <td><%= button_to "End", end_hack_path(hack), confirm: 'End hack?', :method => :put %></td>
     </tr>
 <% end %>
 </table>

@@ -1,4 +1,6 @@
 class HacksController < ApplicationController
+  before_filter :redirect_to_active_hack, :except => [:show, :index]
+  
   # GET /hacks
   # GET /hacks.json
   def index
@@ -15,7 +17,7 @@ class HacksController < ApplicationController
   def show
     @hack = Hack.find(params[:id])
     @departments = ['Analytics','Rails','WEB TEAM','Clients','Core Services','Infrastructure','Other','Product','UX']
-    @vote_directions = Vote.select("id AS x,direction AS y").order("created_at").limit(40)
+    @vote_directions = Vote.select("id AS x,direction AS y").order("created_at").limit(40).to_json
     @vote_times = Vote.select("created_at").order("created_at").to_json
 
     respond_to do |format|
@@ -28,7 +30,6 @@ class HacksController < ApplicationController
   # GET /hacks/new.json
   def new
     @hack = Hack.new
-    Hack.all_false_instead_of(@hack)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,7 +46,6 @@ class HacksController < ApplicationController
   # POST /hacks.json
   def create
     @hack = Hack.new(params[:hack])
-    Hack.all_false_instead_of(@hack)
 
     respond_to do |format|
       if @hack.save
@@ -62,7 +62,6 @@ class HacksController < ApplicationController
   # PUT /hacks/1.json
   def update
     @hack = Hack.find(params[:id])
-    Hack.all_false_instead_of(@hack)
 
     respond_to do |format|
       if @hack.update_attributes(params[:hack])
@@ -87,20 +86,39 @@ class HacksController < ApplicationController
     end
   end
   
-  def activate
+  def start
     @hack = Hack.find(params[:id])
-    Hack.all_false_instead_of(@hack)
+    Hack.all_false_except(@hack)
+    @hack.update_attributes(:start_time => Time.now)
+     
+    respond_to do |format|
+       if @hack.save
+         format.html { redirect_to hacks_path}
+         format.json { render json: @hack, notice: 'Hack started.'}
+       else
+         format.html { render action: "edit" }
+         format.json { render json: @hack.errors, status: :unprocessable_entity }
+       end
+     end
+  end
+  
+  def end
+    @hack = Hack.find(params[:id])
+    @hack.update_attributes(:end_time => Time.now)
+    @hack.update_attributes(:active_hack => false)
 
     respond_to do |format|
-      if @hack.update_attributes(params[:hack])
-        Hack.all_false_instead_of(@hack)
-        format.html { redirect_to hacks_path, notice: 'Hack was successfully updated.' }
+      if @hack.save
+        format.html { redirect_to hacks_path, notice: 'Hack ended.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @hack.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  def limbo
   end
   
 end

@@ -6,7 +6,7 @@ VoteMachine::Application.routes.draw do
     post 'login'  => :create
     delete 'logout' => :destory
   end
-
+  
   get "admin/index"
 
   get "sessions/new"
@@ -17,7 +17,18 @@ VoteMachine::Application.routes.draw do
 
   resources :votes
   resources :voters
-  resources :hacks
+  resources :hacks do
+    member do
+      put 'start'
+    end
+    
+    member do
+      put 'end'
+    end
+    
+  end
+  
+  get "hacks/limbo"
   
   get "booth/index"
 

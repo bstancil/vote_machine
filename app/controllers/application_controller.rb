@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
 #  before_filter :authorize
 #  before_filter :admin_authorize
   
@@ -15,7 +14,11 @@ class ApplicationController < ActionController::Base
     def redirect_to_active_hack
       active_hack = Hack.find_by_active_hack(true)
       unless Voter.find_by_id(session[:voter_id ])
-        redirect_to hack_path(active_hack)
+        if active_hack == nil
+          redirect_to hacks_path
+        else 
+          redirect_to hack_path(active_hack)
+        end
       end
     end
     

@@ -7,4 +7,5 @@ class BoothController < ApplicationController
     @departments = ['Analytics','Rails','WEB TEAM','Clients','Core Services','Infrastructure','Other','Product','UX']
   end
   
+  
 end

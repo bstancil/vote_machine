@@ -1,5 +1,5 @@
 class Hack < ActiveRecord::Base
-  attr_accessible :gen, :hackers, :title, :active_hack
+  attr_accessible :gen, :hackers, :title, :active_hack, :start_time, :end_time
 
   has_many :votes
 
@@ -7,13 +7,13 @@ class Hack < ActiveRecord::Base
   validates :title, uniqueness: true
 
 
-  def self.all_false_instead_of(hack)
+  def self.all_false_except(hack)
       Hack.update_all :active_hack => false
-      hack.update_attributes :active_hack => true
+      hack.update_attributes(:active_hack => true)
   end
-
+  
   def department_votes(department)
-      dept_votes = votes.where(department: department)
+      dept_votes = votes.where(department: department) #, :created_at => :start_time..'2013-01-01 00:00:00')
       dept_votes.sum(:direction)
   end
 
