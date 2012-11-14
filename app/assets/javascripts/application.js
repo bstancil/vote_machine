@@ -11,5 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.tipsy
 //= require jquery_ujs
-//= require_tree .
+// require_tree .
+
+//= require visualizie/manifests/viz.js

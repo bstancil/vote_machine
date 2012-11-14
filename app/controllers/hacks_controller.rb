@@ -15,6 +15,8 @@ class HacksController < ApplicationController
   def show
     @hack = Hack.find(params[:id])
     @departments = ['Analytics','Rails','WEB TEAM','Clients','Core Services','Infrastructure','Other','Product','UX']
+    @vote_directions = Vote.select("id AS x,direction AS y").order("created_at").limit(40)
+    @vote_times = Vote.select("created_at").order("created_at").to_json
 
     respond_to do |format|
       format.html # show.html.erb}
