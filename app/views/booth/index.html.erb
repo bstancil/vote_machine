@@ -1,16 +1,15 @@
 <h1>Voting Booth</h1>
 <% @hack.each do |hack| %>
     <div class = "entry">
-	<body>
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 	    <script src="/app/assets/javascripts/bootstrap.min.js"></script>
         <h3><%= hack.title %></h3>
         <h2><%= hack.hackers %></h2>
-        <ul>
-            <%= button_to 'Vote Up!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: 1) %>
-            <%= button_to 'Vote Down!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: -1) %>
-            <br />
-            <br />
+        <div class="vote-buttons">
+	        <div class="btn btn-success"><%= button_to 'Vote Up!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: 1) %></div>
+            <div class="btn btn-danger"><%= button_to 'Vote Down!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: -1) %></div>
+    </div>
+<div class="graph">
             <h3><%= hack.adj_score(hack).round(1) %></h3>
             <h3><%= hack.early_score(hack) %></h3>
             <h3><%= hack.late_score(hack) %></h3>
@@ -63,7 +62,8 @@
                  });
 
                </script>
-
+</div>
+<div class="clearfix"></div>
             <h3>Most Recent Votes</h3>
                 <table>
                     <tr>
@@ -83,8 +83,6 @@
                     <li><%= department %>: <%= hack.adj_department_score(hack,department) %></li>
                     <% end %>
                 </ul>
-                
-            </body>
-        
+               
     </div>
 <% end %>
