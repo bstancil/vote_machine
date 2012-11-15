@@ -1,6 +1,6 @@
 //= require d3.v2.min
 //= require jquery.tipsy
-//= require viz.js/class
+
 //= require viz.js/chart
 //= require viz.js/bar_chart
 //= require viz.js/bullet_chart
