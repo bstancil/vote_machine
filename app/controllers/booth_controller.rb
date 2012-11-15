@@ -1,5 +1,5 @@
 class BoothController < ApplicationController
-  skip_before_filter :redirect_to_active_hack
+  #skip_before_filter :redirect_to_active_hack
     
   def index
     @hack = Hack.where("active_hack = true ")

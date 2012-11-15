@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  skip_before_filter :redirect_to_active_hack, :only => [:create]
+  #skip_before_filter :redirect_to_active_hack, :only => [:create]
   
   # GET /votes
   # GET /votes.json

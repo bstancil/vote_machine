@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  skip_before_filter :redirect_to_active_hack
-  skip_before_filter :authorize
+  #skip_before_filter :redirect_to_active_hack
+  #skip_before_filter :authorize
   
   def new
   end

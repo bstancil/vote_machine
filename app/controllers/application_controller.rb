@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :redirect_to_active_hack
-  before_filter :authorize
+  #before_filter :redirect_to_active_hack
+  #before_filter :authorize
   
   
   protected
