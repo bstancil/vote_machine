@@ -14,7 +14,6 @@
             <h3><%= hack.adj_score(hack).round(1) %></h3>
             <h3><%= hack.early_score(hack) %></h3>
             <h3><%= hack.late_score(hack) %></h3>
-            <pre><%= @vote_logs.select("id AS x,hack_score AS y").to_json.html_safe %></pre>
                <div class="chart" id="non_stacked_line"></div>  
                <script type="text/javascript">
                  
