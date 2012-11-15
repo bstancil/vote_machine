@@ -2,16 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.vote-buttons {
-width:100px;
-float:left;
-}
-
-.graph {
-width:400px;
-float:right;
-}
-
 
 .booth {
   h1 {
@@ -30,7 +20,7 @@ float:right;
     text-align: left;
     border-bottom: 1px dotted #77d;
     min-height: 100px;
-  
+}  
     h3 {
       font-size: 120%;
       font-family: sans-serif;
