@@ -1,6 +1,9 @@
 <h1>Voting Booth</h1>
 <% @hack.each do |hack| %>
     <div class = "entry">
+	<body>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+	    <script src="/app/assets/javascripts/bootstrap.min.js"></script>
         <h3><%= hack.title %></h3>
         <h2><%= hack.hackers %></h2>
         <ul>
@@ -62,7 +65,7 @@
 
                </script>
 
-            <h3>Most Recent Votes - STACY WAS HERE!</h3>
+            <h3>Most Recent Votes</h3>
                 <table>
                     <tr>
                         <td>Voter</td>
@@ -82,7 +85,7 @@
                     <% end %>
                 </ul>
                 
-            
+            </body>
         
     </div>
 <% end %>
