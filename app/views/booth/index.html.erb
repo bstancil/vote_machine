@@ -5,14 +5,9 @@
 	    <script src="/app/assets/javascripts/bootstrap.min.js"></script>
         <h3><%= hack.title %></h3>
         <h2><%= hack.hackers %></h2>
-        <div class="vote-buttons">
-	        <button class="btn btn-large btn-success"><%= button_to 'Vote Up!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: 1) %></button>
-            <button class="btn btn-large btn-danger"><%= button_to 'Vote Down!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: -1) %></button>
-    </div>
-<div class="graph">
-            <h3><%= hack.adj_score(hack).round(1) %></h3>
-            <h3><%= hack.early_score(hack) %></h3>
-            <h3><%= hack.late_score(hack) %></h3>
+	       <h3><%= hack.adj_score(hack).round(1) %></h3>
+            <button class="btn btn-large btn-success"><%= button_to 'Vote Up!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: 1) %></button>
+               <button class="btn btn-large btn-danger"><%= button_to 'Vote Down!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: -1) %></button>
                <div class="chart" id="non_stacked_line"></div>  
                <script type="text/javascript">
                  
@@ -62,8 +57,7 @@
                  });
 
                </script>
-</div>
-<div class="clearfix"></div>
+
             <h3>Most Recent Votes</h3>
                 <table>
                     <tr>
