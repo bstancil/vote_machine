@@ -16,6 +16,8 @@ class HacksController < ApplicationController
   # GET /hacks/1.json
   def show
     @hack = Hack.find(params[:id])
+    @hacks = Hack.all
+    @voters = Voter.all
     @departments = ['Analytics','Rails','WEB TEAM','Clients','Core Services','Infrastructure','Other','Product','UX']
     @vote_directions = Vote.select("id AS x,direction AS y").order("created_at").limit(40).to_json
     @vote_times = Vote.select("created_at").order("created_at").to_json

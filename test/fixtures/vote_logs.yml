@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  hack_id: 1
+  hack_score: 1.5
+  logged_at: 2012-11-14 16:53:25
+  time_index: 1
+
+two:
+  hack_id: 1
+  hack_score: 1.5
+  logged_at: 2012-11-14 16:53:25
+  time_index: 1

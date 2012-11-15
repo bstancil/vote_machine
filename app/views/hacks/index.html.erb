@@ -11,11 +11,9 @@
         <td>Show</td>
         <td>Edit</td>
         <td>Destroy</td>
-        <td>Start</td>
-        <td>End</td>
+        <td>Action</td>
     </tr>
-
-<%= @hacks.each do |hack| %>
+<% @hacks.each do |hack| %>
     <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
         <td><%= hack.title %></td>
         <td><%= hack.hackers %></td>
@@ -28,10 +26,17 @@
         <td><%= link_to 'Destroy', hack,
                         confirm: 'Are you sure?',
                         method: :delete %></td>
-        <td><%= button_to "Start", start_hack_path(hack), confirm: 'Start hack?', :method => :put %></td>
-        <td><%= button_to "End", end_hack_path(hack), confirm: 'End hack?', :method => :put %></td>
+        <% if @hacks.find_by_active_hack(true) == nil %>
+            <td><%= button_to "Start", start_hack_path(hack), confirm: 'Start hack?', :method => :put %></td>
+        <% else %>
+            <% if hack.active_hack %>
+                <td><%= button_to "END", end_hack_path(hack), confirm: 'End hack?', :method => :put %></td>
+            <% else %>
+                <td></td>
+            <% end %>
+        <% end %>
+    <% end %>
     </tr>
-<% end %>
 </table>
 
 <br />

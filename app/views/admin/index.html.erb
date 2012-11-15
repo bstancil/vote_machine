@@ -1,27 +1,52 @@
 <h1>Here are all the things</h1>
 
-<% if notice %>
-<p id="notice"><%= notice %></p>
-<% end %>
+<table>
+    <tr>
+        <td>Hack</td>
+        <td>Hackers</td>
+        <td>Overall Score</td>
+        <td>Early Score</td>
+        <td>Late Score</td>
+        <td>Score Change</td>
+        <% @departments.each do |department| %>
+        <td><%= department %></td>
+        <% end %>
+    </tr>
+    <% @hacks.each do |hack| %>
+    <tr>
+        <td><%= hack.title %></td>
+        <td><%= hack.hackers %></td>
+        <td><%= hack.adj_score(hack).round(1) %></td>
+        <td><%= hack.early_score(hack).round(1) %></td>
+        <td><%= hack.late_score(hack).round(1) %></td>
+        <td><%= (hack.late_score(hack)- hack.early_score(hack)).round(1) %></td>
+        <% @departments.each do |department| %>
+        <td><%= hack.adj_department_score(hack,department).round(1) %></td>
+        <% end %>
+        
+    </tr>
+    <% end %>   
+</table>
 
-<% @hacks.each do |hack| %>
-    <div class = "entry">
-        <h3><%= hack.title %></h3>
-        <ul>
-            <li><strong>Votes: <%= hack.total_score %></strong></li>
-            <% @departments.each do |department| %>
-            <li><%= department %>: <%= hack.department_votes(department) %></li>
-            <% end %>
-        </ul>
-    </div>
-<% end %>
-
-<% @voters.each do |voter| %>
-    <div class = "entry">
-        <h3><%= voter.name %></h3>
-        <ul>
-            <li><strong>Votes: <%= voter.total_votes %></strong>, <%= voter.gen_score(true) %>, <%= voter.gen_score(false) %></li>
-        </ul>
-    </div>
-<% end %>
-
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Total Votes</td>
+        <td>Total Up Votes</td>
+        <td>Total Down Votes</td>
+        <td>Guy Average</td>
+        <td>Girl Average</td>
+        <td>Gender Discrepancy</td>
+    </tr>
+    <% @voters.each do |voter| %>
+    <tr>
+        <td><%= voter.name %></td>
+        <td><%= voter.total_votes %></td>
+        <td><%= voter.up_votes %></td>
+        <td><%= voter.down_votes %></td>
+        <td><%= voter.gen_avg(false) %></td>
+        <td><%= voter.gen_avg(true) %></td>
+        <td><%= voter.gen_avg(true) - voter.gen_avg(false) %></td>
+    </tr>
+    <% end %>
+</table>

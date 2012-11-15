@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121114162641) do
+ActiveRecord::Schema.define(:version => 20121115005325) do
 
   create_table "hacks", :force => true do |t|
     t.string   "title"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(:version => 20121114162641) do
     t.boolean  "active_hack"
     t.datetime "start_time"
     t.datetime "end_time"
+  end
+
+  create_table "vote_logs", :force => true do |t|
+    t.integer  "hack_id"
+    t.float    "hack_score"
+    t.datetime "logged_at"
+    t.integer  "time_index"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "voters", :force => true do |t|

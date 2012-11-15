@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Hack:</b>
+  <%= @vote_log.hack_id %>
+</p>
+
+<p>
+  <b>Hack score:</b>
+  <%= @vote_log.hack_score %>
+</p>
+
+<p>
+  <b>Logged at:</b>
+  <%= @vote_log.logged_at %>
+</p>
+
+<p>
+  <b>Time index:</b>
+  <%= @vote_log.time_index %>
+</p>
+
+
+<%= link_to 'Edit', edit_vote_log_path(@vote_log) %> |
+<%= link_to 'Back', vote_logs_path %>

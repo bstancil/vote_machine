@@ -1,4 +1,6 @@
 VoteMachine::Application.routes.draw do
+  resources :vote_logs
+
   get 'admin' => 'admin#index'
   
   controller :sessions do

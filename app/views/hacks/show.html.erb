@@ -13,6 +13,7 @@
 <div class = "entry">
     <ul>
         <li>Current Score: <%= @hack.total_score %></li>
+        <li><strong>Adjusted Score: <%= @hack.adj_score(@hack) %></strong></li>
         <li>Department Scores</li>
         <ul>
             <% @departments.each do |department| %>

@@ -1,0 +1,29 @@
+<h1>Listing vote_logs</h1>
+
+<table>
+  <tr>
+    <th>Hack</th>
+    <th>Hack score</th>
+    <th>Created_at</th>
+    <th>Time index</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @vote_logs.each do |vote_log| %>
+  <tr>
+    <td><%= vote_log.hack_id %></td>
+    <td><%= vote_log.hack_score %></td>
+    <td><%= vote_log.created_at %></td>
+    <td><%= vote_log.time_index %></td>
+    <td><%= link_to 'Show', vote_log %></td>
+    <td><%= link_to 'Edit', edit_vote_log_path(vote_log) %></td>
+    <td><%= link_to 'Destroy', vote_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Vote log', new_vote_log_path %>
