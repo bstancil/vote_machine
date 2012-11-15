@@ -1,5 +1,4 @@
 class VotersController < ApplicationController
-  before_filter :redirect_to_active_hack
 
   # GET /voters
   # GET /voters.json

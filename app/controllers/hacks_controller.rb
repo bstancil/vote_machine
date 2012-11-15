@@ -1,5 +1,4 @@
 class HacksController < ApplicationController
-  before_filter :redirect_to_active_hack, :except => [:show, :index]
   
   # GET /hacks
   # GET /hacks.json

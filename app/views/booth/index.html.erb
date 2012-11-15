@@ -11,21 +11,35 @@
             <h3><%= hack.adj_score(hack).round(1) %></h3>
             <h3><%= hack.early_score(hack) %></h3>
             <h3><%= hack.late_score(hack) %></h3>
-            <%= @vote_logs.select("created_at AS x, hack_score AS y").to_json %>
+            <pre><%= @vote_logs.select("id AS x,hack_score AS y").to_json.html_safe %></pre>
                <div class="chart" id="non_stacked_line"></div>  
                <script type="text/javascript">
-                 var data = {  "contributors":[{"x":0,"y":15},{"x":1,"y":11},{"x":2,"y":120},{"x":3,"y":18},{"x":4,"y":21},{"x":5,"y":66},{"x":6,"y":74},{"x":7,"y":115},{"x":8,"y":152},{"x":9,"y":160},{"x":10,"y":162},{"x":11,"y":92},{"x":12,"y":92},{"x":13,"y":139},{"x":14,"y":75},{"x":15,"y":53},{"x":16,"y":57},{"x":17,"y":54},{"x":18,"y":37},{"x":19,"y":26},{"x":20,"y":32},{"x":21,"y":28},{"x":22,"y":43},{"x":23,"y":40},{"x":24,"y":50},{"x":25,"y":95},{"x":26,"y":51},{"x":27,"y":45},{"x":28,"y":77},{"x":29,"y":95},{"x":30,"y":123},{"x":31,"y":168},{"x":32,"y":161},{"x":33,"y":124},{"x":34,"y":242},{"x":35,"y":449},{"x":36,"y":933},{"x":37,"y":1231},{"x":38,"y":6092},{"x":39,"y":3795},{"x":40,"y":2363}]
-                 }
-                 var time_ids = ["2008/09/01 00:00:00","2008/10/01 00:00:00","2008/11/01 00:00:00","2008/12/01 00:00:00","2009/01/01 00:00:00","2009/02/01 00:00:00","2009/03/01 00:00:00","2009/04/01 00:00:00","2009/05/01 00:00:00","2009/06/01 00:00:00","2009/07/01 00:00:00","2009/08/01 00:00:00","2009/09/01 00:00:00","2009/10/01 00:00:00","2009/11/01 00:00:00","2009/12/01 00:00:00","2010/01/01 00:00:00","2010/02/01 00:00:00","2010/03/01 00:00:00","2010/04/01 00:00:00","2010/05/01 00:00:00","2010/06/01 00:00:00","2010/07/01 00:00:00","2010/08/01 00:00:00","2010/09/01 00:00:00","2010/10/01 00:00:00","2010/11/01 00:00:00","2010/12/01 00:00:00","2011/01/01 00:00:00","2011/02/01 00:00:00","2011/03/01 00:00:00","2011/04/01 00:00:00","2011/05/01 00:00:00","2011/06/01 00:00:00","2011/07/01 00:00:00","2011/08/01 00:00:00","2011/09/01 00:00:00","2011/10/01 00:00:00","2011/11/01 00:00:00","2011/12/01 00:00:00","2012/01/01 00:00:00"]
+                 
+                 var data = {  "contributors": <%= @vote_logs.select("id AS x,hack_score AS y").to_json.html_safe %>
+                   }               
+
                  var width = 900
                    , height = 500
                    , xLeftMargin = 100
                    , xRightMargin = 50 
                    , yMargin = 50
-                   , startX = new Date("2008/09/01 00:00:00")
-                   , endX = new Date("2012/01/01 00:00:00");
+                   , startX = <%= @vote_logs.first.id %>
+                   , endX = <%= @vote_logs.last.id %>;
+                 
+                 var ymax = d3.max($.map(data, function(values, key){ 
+                   return d3.max($.map(values, 
+                     function(values){ return self.stacked? (values.y0 + values.y) : values.y; 
+                   })) 
+                 }));
+                 var ymin = d3.min($.map(data, function(values, key){ 
+                   return d3.min($.map(values, 
+                     function(values){ return self.stacked? (values.y0 + values.y) : values.y; 
+                   })) 
+                 }));
+                 
+                 console.log(ymin > 0 ? 0 : ymin - .1 * Math.abs(ymin), ymax < 50 ? 55 : ymax + .1 * Math.abs(ymax))
 
-                 var non_stacked_line = new LineChart("#non_stacked_line", {contributors: data.contributors}, {
+                 var non_stacked_line = new LineChart("#non_stacked_line", data, {
                      width: width
                    , height: height
                    , xLeftMargin: xLeftMargin
@@ -33,19 +47,17 @@
                    , yMargin: yMargin
                    , startX: startX
                    , endX: endX
-                   , xLineTransform: function(n) { return new Date(time_ids[n]); }
                    , stacked: false
                    , fillShades: false
-                   , x: d3.time.scale().domain([startX, endX]).range([0 + xLeftMargin, width - xLeftMargin - xRightMargin])
                    , fill: d3.scale.ordinal().range(['#77c5d5', '#ed8b00', '#78be20', '#f3d03e', '#d14124', '#0092bc'])
                    , xNumTicks: 16
-                   , yNumTicks: 11
-                   , rightAxis: d3.svg.axis().scale(
-                       d3.scale.linear().domain([0, 100]).range([height - yMargin, 0 + yMargin])
-                     ).ticks(10).orient('right')
+                   , yNumTicks: 5
                    , drawDots: true // option to add dots to lines
                    , useTipsy: true
-                   , dot_radius: 5
+                   , dot_radius: 2
+                   , min: ymin > 0 ? 0 : ymin - .5 * Math.abs(ymin - (ymax < 50 ? 55 : ymax + 5))
+                   , max: ymax < 50 ? 55 : ymax + 5
+                   , yAxisScale: d3.scale.linear().domain([(ymin > 0 ? 0 : ymin - .5 * Math.abs(ymin - (ymax < 50 ? 55 : ymax + 5))), (ymax < 50 ? 55 : ymax + 5)]).range([this.height - this.yMargin, 0 + this.yMargin])
                  });
 
                </script>
@@ -56,9 +68,9 @@
                         <td>Voter</td>
                         <td>Vote Type</td>
                     </tr>
-                    <% @votes.each do |vote| %>
+                    <% @votes.where(:hack_id => hack.id).each do |vote| %>
                     <tr>
-                        <td><%= vote.voter.name %></td>
+                        <td><%= vote.voter.id %></td>
                         <td><%= vote.direction %></td>
                     </tr>
                     <% end %>

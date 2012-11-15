@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-#  skip_before_filter :authorize
+  skip_before_filter :redirect_to_active_hack
+  skip_before_filter :authorize
   
   def new
   end
@@ -9,9 +10,9 @@ class SessionsController < ApplicationController
     if voter
       session[:voter_id] = voter.id
       session[:name] = voter.name  
-      redirect_to admin_url
+      redirect_to booth_path
     else
-      redirect_to login_url, alert: "Create a New Voter"
+      redirect_to login_url
     end
   end
 
