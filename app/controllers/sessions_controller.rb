@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     if voter
       session[:voter_id] = voter.id
       session[:name] = voter.name  
-      redirect_to booth_path
+      redirect_to booth_index_url
     else
       redirect_to login_url
     end
