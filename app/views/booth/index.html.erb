@@ -66,7 +66,7 @@
                     </tr>
                     <% @votes.where(:hack_id => hack.id).each do |vote| %>
                     <tr>
-                        <td><%= vote.voter.name %></td>
+
                         <td><%= vote.direction %></td>
                     </tr>
                     <% end %>
