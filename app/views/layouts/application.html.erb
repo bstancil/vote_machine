@@ -9,7 +9,9 @@
 </head>
 <body>
 <body class ='<%= controller.controller_name %>'>
-
+    <script type="text/javascript" data-app-id="iRO1xIby6RxhHh1qfU96w" src="https://assets.yammer.com/platform/yam.js"></script>
+    <span id="yammer-login"></span>
+    <script> yam.connect.loginButton('#yammer-login', function (resp) { if (resp.authResponse) { document.getElementById('yammer-login').innerHTML = 'Welcome to Yammer!'; } }); </script>
   <div id="banner">
     <%= @page_title || "Green" %>
   </div>
