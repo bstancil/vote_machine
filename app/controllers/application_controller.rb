@@ -1,23 +1,25 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  #before_filter :redirect_to_active_hack
-  #before_filter :authorize
+  before_filter :redirect_to_active_hack
+  before_filter :authorize
   
   
   protected
   
     def authorize
       if session[:voter_id] == nil
-        redirect_to login_url, notice: "Please log in"
+        redirect_to login_url
       end
     end
     
     def redirect_to_active_hack
-      active_hack = Hack.find_by_active_hack(true)
-      if session[:voter_id ] != 4
-        redirect_to booth_path
+      voter = current_voter
+      if voter.name != "5e8bf9c15200956c52c80f3396332b13"
+        redirect_to booth_index_path
       end
     end
+    
+
     
   private 
 

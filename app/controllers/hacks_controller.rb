@@ -119,7 +119,4 @@ class HacksController < ApplicationController
     end
   end
   
-  def limbo
-  end
-  
 end

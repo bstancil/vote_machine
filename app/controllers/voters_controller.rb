@@ -1,4 +1,6 @@
 class VotersController < ApplicationController
+  skip_before_filter :redirect_to_active_hack, :only => [:new, :create]
+  skip_before_filter :authorize, :only => [:new, :create]
 
   # GET /voters
   # GET /voters.json
@@ -28,6 +30,8 @@ class VotersController < ApplicationController
   def new
     @voter = Voter.new
     @department = params[:department]
+    @dept = ['Analytics','Clients','Front End','Infrastructure','Product','QA','Rails','Other']
+    
     
     respond_to do |format|
       format.html # new.html.erb
@@ -48,7 +52,7 @@ class VotersController < ApplicationController
 
     respond_to do |format|
       if @voter.save
-        format.html { redirect_to voters_url, notice: "Voter #{@voter.name} was successfully created." }
+        format.html { redirect_to login_url, notice: "Voter #{@voter.name} was successfully created." }
         format.json { render json: @voter, status: :created, location: @voter }
       else
         format.html { render action: "new" }

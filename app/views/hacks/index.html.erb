@@ -1,7 +1,17 @@
 <h1>Listing hacks</h1>
+<script type="text/javascript" data-app-id="TvYDhcTzTPco3DYkDFtDVw" src="https://assets.staging.yammer.com/platform/yam.js"></script>
+  <span id="yammer-login"></span>
 
-<table>
-    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+  <script type="text/javascript" data-app-id="TvYDhcTzTPco3DYkDFtDVw" src="https://assets.staging.yammer.com/platform/yam.js"></script>
+    <span id="yammer-login"></span>
+
+    <script> yam.connect.loginButton('#yammer-login', function (resp) { if (resp.authResponse) { 
+      console.log(resp);
+      document.getElementById('yammer-login').innerHTML = 'Welcome to Yammer, ' + resp.user.full_name + "!";
+    } });
+    </script>
+<table class= "table">
+    <tr>
         <td>Title</td>
         <td>Hackers</td>
         <td>Gen</td>
@@ -14,7 +24,7 @@
         <td>Action</td>
     </tr>
 <% @hacks.each do |hack| %>
-    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+    <tr>
         <td><%= hack.title %></td>
         <td><%= hack.hackers %></td>
         <td><%= hack.gen %></td>

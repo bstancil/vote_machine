@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  #skip_before_filter :redirect_to_active_hack
-  #skip_before_filter :authorize
+  skip_before_filter :redirect_to_active_hack
+  skip_before_filter :authorize
   
   def new
     
@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
   def create
     voter = Voter.find_by_name(params[:name])
-    if voter
+    if voter 
       session[:voter_id] = voter.id
       session[:name] = voter.name  
       redirect_to booth_index_url

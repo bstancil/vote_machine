@@ -1,16 +1,16 @@
 /* general page styles */
-.chart { border: 3px solid #CCC; width: 600px; height: 520px; padding:5px; background: #FFF; }
+.chart { border: 3px solid #666; width: 600px; height: 520px; padding:5px; background: #333; overflow:hidden;}
 .clip { float:left; display: inline; margin-bottom: 40px; }
 .clip-wrapper { float:left; margin: 5px 40px auto 20px; width: 200px; height: 200px; position: relative; }
 .clip-wrapper a img{ position: absolute; clip: rect(3 200px 200px 3); left:0; bottom: 0; top: 0; right: 0; border: 3px solid #CCC; }
 .clip-wrapper a:hover img { border: 3px solid #77c5d5; }
 
 /* general styles for axes, rules and ticks in LineChart, ColumnChart, and BarChart */
-g.axis { fill: #666; font-size: 12px; }
-line.tick { stroke: #666; }
-path.domain{ fill: none; stroke: #333; }
-line.rule { stroke: #CCC; stroke-width: 0.6px; }
-line.rule_first { stroke: #333; stroke-width: 1px; }
+g.axis { fill: #FFF; font-size: 14px; }
+line.tick { stroke: #FFF; }
+path.domain{ fill: none; stroke: #666; }
+line.rule { stroke: #FFF; stroke-width: 2px; }
+line.rule_first { stroke: #333; stroke-width: 2px; }
 
 /* styles for LineChart */
 .line_chart circle.series_0:hover, circle.series_1:hover, circle.series_2:hover, circle.series_likers:hover { stroke: #999; stroke-width: 2px; }

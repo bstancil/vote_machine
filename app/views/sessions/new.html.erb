@@ -1,20 +1,12 @@
-<div>
-  <% if flash[:alert] %>
-    <p id="notice"><%= flash[:alert] %></p>
-  <% end %>
-  
-  <%= form_tag do %>
-    <fieldset>
-      <legend>Please Log In</legend>
-      
-      <div>
-        <%= label_tag :name, 'Name:' %>
-        <%= text_field_tag :name, params[:name] %>
-      </div>
-      
-      <div>
-        <%= submit_tag "Login" %>
-      </div>
-    </fieldset>
-  <% end %>
+<div class="container">
+<%= form_tag do %>
+    <h2 class="form-signin-heading" style="color:#333;">Please sign in</h2>
+        <form class="form-signin">
+            <div class="input-block-level" style="color:#333;"><%= label_tag :name, 'Yammer Alias:' %>
+            <%= text_field_tag :name, params[:name] %></div>
+            <button class="btn btn-medium btn-primary" type="submit"><%= submit_tag "Login" %></button>
+</form>
+<br />
+<h4 style="color:#333;">Not a voter yet? <%= link_to 'Register to vote!', new_voter_path %></h4>
+        <% end %>
 </div>

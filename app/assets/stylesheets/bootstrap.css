@@ -966,8 +966,8 @@ textarea {
 }
 
 label {
-  display: block;
-  margin-bottom: 5px;
+  display: inline;
+  margin-bottom:10px;
 }
 
 select,

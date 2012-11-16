@@ -1,6 +1,20 @@
+<% if @vote_logs.nil? %>
+    <h1 style="margin-left:20px;">No hack on stage right now...go grab a drink.</h1>
+<% else %>
+
 <div id="wrap">
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="/app/assets/javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        window.onload = setupRefresh;
+
+        function setupRefresh() {
+          setTimeout("refreshPage();", 5000);
+        }
+        function refreshPage() {
+           window.location = location.href;
+        }
+      </script>
 <!-- Begin page content -->
 <div class="container">
     <% @hack.each do |hack| %>
@@ -12,8 +26,10 @@
 		<p>Real-time score: <span id="score"><%= hack.adj_score(hack).round(1) %></span></p>
 		<br />
 		<p align="center">
-		<button class="btn btn-large btn-success" type="button"><%= button_to 'I love it!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: 1) %></button>
-		&nbsp;&nbsp;<button class="btn btn-large btn-danger" type="button"><%= button_to 'Get off the stage!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: -1) %></button></p>
+		<button class="btn btn-large btn-success" type="button"><%= button_to 'I love it!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: 1)    
+		        %></button>
+		&nbsp;&nbsp;<button class="btn btn-large btn-danger" type="button"><%= button_to 'Get off the stage!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department,
+		        direction: -1) %></button></p>
            <div class="chart" id="non_stacked_line"></div>  
            <script type="text/javascript">
              
@@ -21,10 +37,10 @@
                }               
 
              var width = 700
-               , height = 520
-               , xLeftMargin = 100
-               , xRightMargin = 50 
-               , yMargin = 50
+               , height = 535   
+               , xLeftMargin = 40
+               , xRightMargin = 60 
+               , yMargin = 10
                , startX = <%= @vote_logs.first.id %>
                , endX = <%= @vote_logs.last.id %>;
              
@@ -51,12 +67,12 @@
                , endX: endX
                , stacked: false
                , fillShades: false
-               , fill: d3.scale.ordinal().range(['#77c5d5', '#ed8b00', '#78be20', '#f3d03e', '#d14124', '#0092bc'])
-               , xNumTicks: 16
+               , fill: d3.scale.ordinal().range(['#E59D24', '#ed8b00', '#78be20', '#f3d03e', '#d14124', '#0092bc'])
+               , xNumTicks: 10
                , yNumTicks: 5
                , drawDots: true // option to add dots to lines
                , useTipsy: true
-               , dot_radius: 2
+               , dot_radius: 5
                , min: ymin > 0 ? 0 : ymin - .5 * Math.abs(ymin - (ymax < 50 ? 55 : ymax + 5))
                , max: ymax < 50 ? 55 : ymax + 5
                , yAxisScale: d3.scale.linear().domain([(ymin > 0 ? 0 : ymin - .5 * Math.abs(ymin - (ymax < 50 ? 55 : ymax + 5))), (ymax < 50 ? 55 : ymax + 5)]).range([this.height - this.yMargin, 0 + this.yMargin])
@@ -68,23 +84,24 @@
 	<div class="right-container">
 		<h3>Most Recent Votes</h3>
 		<% @votes.where(:hack_id => hack.id).each do |vote| %>
-		<p class="voter"><%= vote.direction %></p>
+		<p class="voter"><%= vote.voter.name%>: <span id="dept-score"><%= if vote.direction == 1; "&#9650;".html_safe; else "&#9660;".html_safe end %></span></p>
 		<% end %>
-<br />
 <h3>Department</h3>
 <% @departments.each do |department| %>
 <p class="voter">
-<%= department %>: <span id="dept-score"><%= hack.adj_department_score(hack,department) %></span></p>
+<%= department %>: <span id="dept-score"><%= hack.adj_department_score(hack,department).round(1) %></span></p>
 <% end %>
 <br />
 <% end %>
 </div>
 </div>
+<br />
 <div class="clearfloat"></div>
       <div id="push"></div>
     </div>
     <div id="footer">
       <div class="container">
-        <p class="muted credit">Happy Birthday Benn Stancil!</p>
+        <p class="muted credit">Did you guys know...it's Benn's Birthday?! Happy birthday Benn!</p>
       </div>
     </div>
+<% end %>

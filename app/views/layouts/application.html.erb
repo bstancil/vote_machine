@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Green</title>
+  <title>Hackday Pulse</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= stylesheet_link_tag    "bootstrap", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <script type="text/javascript" data-app-id="iRO1xIby6RxhHh1qfU96w" src="https://assets.yammer.com/platform/yam.js"></script>
+
 </head>
 <body>
 <body class ='<%= controller.controller_name %>'>
 
 
 
-    <% @page_title || "Green" %>
+    <% @page_title || "Hackday Pulse" %>
       <%= yield %>
 </body>
 </html>

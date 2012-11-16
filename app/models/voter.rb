@@ -1,5 +1,5 @@
 class Voter < ActiveRecord::Base
-  attr_accessible :department, :name
+  attr_accessible :department, :name, :password_digest
 
   has_many :votes, dependent: :destroy
   has_many :hacks, :through => :votes, :uniq => true

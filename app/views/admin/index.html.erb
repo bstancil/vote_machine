@@ -1,7 +1,8 @@
-<h1>Here are all the things</h1>
-
-<table>
-    <tr>
+<div style="padding:10px 20px; background-color:#FFF;">
+<h1>Results</h1>
+<br />
+<table class="table table-striped" style="color:#333;">
+    <tr style="font-weight:bold;">
         <td>Hack</td>
         <td>Hackers</td>
         <td>Overall Score</td>
@@ -16,27 +17,24 @@
     <tr>
         <td><%= hack.title %></td>
         <td><%= hack.hackers %></td>
-        <td><%= hack.adj_score(hack).round(1) %></td>
-        <td><%= hack.early_score(hack).round(1) %></td>
-        <td><%= hack.late_score(hack).round(1) %></td>
-        <td><%= (hack.late_score(hack)- hack.early_score(hack)).round(1) %></td>
+        <td><%= hack.adj_score(hack).round %></td>
+        <td><%= hack.early_score(hack).round %></td>
+        <td><%= hack.late_score(hack).round %></td>
+        <td><%= (hack.late_score(hack)- hack.early_score(hack)).round %></td>
         <% @departments.each do |department| %>
-        <td><%= hack.adj_department_score(hack,department).round(1) %></td>
+        <td><%= hack.adj_department_score(hack,department).round %></td>
         <% end %>
         
     </tr>
     <% end %>   
 </table>
-
-<table>
-    <tr>
+<br /><br />
+<table class="table table-striped" style="color:#333;">
+    <tr style="font-weight:bold;">
         <td>Name</td>
         <td>Total Votes</td>
         <td>Total Up Votes</td>
         <td>Total Down Votes</td>
-        <td>Guy Average</td>
-        <td>Girl Average</td>
-        <td>Gender Discrepancy</td>
     </tr>
     <% @voters.each do |voter| %>
     <tr>
@@ -44,9 +42,7 @@
         <td><%= voter.total_votes %></td>
         <td><%= voter.up_votes %></td>
         <td><%= voter.down_votes %></td>
-        <td><%= voter.gen_avg(false) %></td>
-        <td><%= voter.gen_avg(true) %></td>
-        <td><%= voter.gen_avg(true) - voter.gen_avg(false) %></td>
     </tr>
     <% end %>
 </table>
+</div>

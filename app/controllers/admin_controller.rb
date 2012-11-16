@@ -4,7 +4,7 @@ class AdminController < ApplicationController
     
     @hacks = Hack.all
     @voters = Voter.all
-    @departments = ['Analytics','Rails','WEB TEAM','Clients','Core Services','Infrastructure','Other','Product','UX']
+    @departments = ['Analytics','Clients','Front End','Infrastructure','Product','QA','Rails','Other']
     @gen = [true,false]
     
   end
