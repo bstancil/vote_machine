@@ -20,10 +20,10 @@
              var data = {  "contributors": <%= @vote_logs.select("id AS x,hack_score AS y").to_json.html_safe %>
                }               
 
-             var width = 700
-               , height = 520
-               , xLeftMargin = 100
-               , xRightMargin = 50 
+             var width = 680
+               , height = 500
+               , xLeftMargin = 50
+               , xRightMargin = 100 
                , yMargin = 50
                , startX = <%= @vote_logs.first.id %>
                , endX = <%= @vote_logs.last.id %>;
