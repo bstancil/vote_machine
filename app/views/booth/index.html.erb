@@ -2,8 +2,8 @@
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="/app/assets/javascripts/bootstrap.min.js"></script>
 <!-- Begin page content -->
-<% @hack.each do |hack| %>
 <div class="container">
+    <% @hack.each do |hack| %>
       <div class="left-container">
         <div class="page-header">
           <h1><%= hack.title %></h1>
@@ -20,10 +20,10 @@
              var data = {  "contributors": <%= @vote_logs.select("id AS x,hack_score AS y").to_json.html_safe %>
                }               
 
-             var width = 680
-               , height = 500
-               , xLeftMargin = 50
-               , xRightMargin = 100 
+             var width = 700
+               , height = 520
+               , xLeftMargin = 100
+               , xRightMargin = 50 
                , yMargin = 50
                , startX = <%= @vote_logs.first.id %>
                , endX = <%= @vote_logs.last.id %>;
@@ -68,15 +68,23 @@
 	<div class="right-container">
 		<h3>Most Recent Votes</h3>
 		<% @votes.where(:hack_id => hack.id).each do |vote| %>
-		<p class="voter">  &nbsp; &nbsp; <%= vote.direction %></p>
+		<p class="voter"><%= vote.direction %></p>
 		<% end %>
 <br />
 <h3>Department</h3>
 <% @departments.each do |department| %>
 <p class="voter">
-<li><%= department %>: <span id="dept-score"><%= hack.adj_department_score(hack,department) %></span></li></p>
+<%= department %>: <span id="dept-score"><%= hack.adj_department_score(hack,department) %></span></p>
 <% end %>
 <br />
-</div>
-</div>
 <% end %>
+</div>
+</div>
+<div class="clearfloat"></div>
+      <div id="push"></div>
+    </div>
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">Happy Birthday Benn Stancil!</p>
+      </div>
+    </div>
