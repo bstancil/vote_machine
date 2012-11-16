@@ -82,6 +82,7 @@
 	 </div>
 
 	<div class="right-container">
+	    <h2>is.gd/hackdaypulse</h2>
 		<h3>Most Recent Votes</h3>
 		<% @votes.where(:hack_id => hack.id).each do |vote| %>
 		<p class="voter"><%= vote.voter.name%>: <span id="dept-score"><%= if vote.direction == 1; "&#9650;".html_safe; else "&#9660;".html_safe end %></span></p>
