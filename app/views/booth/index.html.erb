@@ -1,82 +1,77 @@
-<h1>Voting Booth</h1>
-<% @hack.each do |hack| %>
-    <div class = "entry">
-		<script src="http://code.jquery.com/jquery-latest.js"></script>
-	    <script src="/app/assets/javascripts/bootstrap.min.js"></script>
-        <h3><%= hack.title %></h3>
-        <h2><%= hack.hackers %></h2>
-	       <h3><%= hack.adj_score(hack).round(1) %></h3>
-            <button class="btn btn-large btn-success"><%= button_to 'Vote Up!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: 1) %></button>
-               <button class="btn btn-large btn-danger"><%= button_to 'Vote Down!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: -1) %></button>
-               <div class="chart" id="non_stacked_line"></div>  
-               <script type="text/javascript">
-                 
-                 var data = {  "contributors": <%= @vote_logs.select("id AS x,hack_score AS y").to_json.html_safe %>
-                   }               
+<div id="wrap">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/app/assets/javascripts/bootstrap.min.js"></script>
+<!-- Begin page content -->
+<div class="container">
+      <div class="left-container">
+        <div class="page-header">
+          <h1><%= hack.title %></h1>
+        </div>
+        <p class="lead">How awesome is this hack by <strong id="subtitle"><%= hack.hackers %></strong>?</p>
+		<p>Real-time score: <span id="score"><%= hack.adj_score(hack).round(1) %></span></p>
+		<br />
+		<p align="center">
+		<button class="btn btn-large btn-success" type="button"><%= button_to 'I love it!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: 1) %></button>
+		&nbsp;&nbsp;<button class="btn btn-large btn-danger" type="button"><%= button_to 'Get off the stage!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: -1) %></button></p>
+		<div class="chart" id="non_stacked_line"></div>  
+           <script type="text/javascript">
+             
+             var data = {  "contributors": <%= @vote_logs.select("id AS x,hack_score AS y").to_json.html_safe %>
+               }               
 
-                 var width = 900
-                   , height = 500
-                   , xLeftMargin = 100
-                   , xRightMargin = 50 
-                   , yMargin = 50
-                   , startX = <%= @vote_logs.first.id %>
-                   , endX = <%= @vote_logs.last.id %>;
-                 
-                 var ymax = d3.max($.map(data, function(values, key){ 
-                   return d3.max($.map(values, 
-                     function(values){ return self.stacked? (values.y0 + values.y) : values.y; 
-                   })) 
-                 }));
-                 var ymin = d3.min($.map(data, function(values, key){ 
-                   return d3.min($.map(values, 
-                     function(values){ return self.stacked? (values.y0 + values.y) : values.y; 
-                   })) 
-                 }));
-                 
-                 console.log(ymin > 0 ? 0 : ymin - .1 * Math.abs(ymin), ymax < 50 ? 55 : ymax + .1 * Math.abs(ymax))
+             var width = 900
+               , height = 500
+               , xLeftMargin = 100
+               , xRightMargin = 50 
+               , yMargin = 50
+               , startX = <%= @vote_logs.first.id %>
+               , endX = <%= @vote_logs.last.id %>;
+             
+             var ymax = d3.max($.map(data, function(values, key){ 
+               return d3.max($.map(values, 
+                 function(values){ return self.stacked? (values.y0 + values.y) : values.y; 
+               })) 
+             }));
+             var ymin = d3.min($.map(data, function(values, key){ 
+               return d3.min($.map(values, 
+                 function(values){ return self.stacked? (values.y0 + values.y) : values.y; 
+               })) 
+             }));
+             
+             console.log(ymin > 0 ? 0 : ymin - .1 * Math.abs(ymin), ymax < 50 ? 55 : ymax + .1 * Math.abs(ymax))
 
-                 var non_stacked_line = new LineChart("#non_stacked_line", data, {
-                     width: width
-                   , height: height
-                   , xLeftMargin: xLeftMargin
-                   , xRightMargin: xRightMargin
-                   , yMargin: yMargin
-                   , startX: startX
-                   , endX: endX
-                   , stacked: false
-                   , fillShades: false
-                   , fill: d3.scale.ordinal().range(['#77c5d5', '#ed8b00', '#78be20', '#f3d03e', '#d14124', '#0092bc'])
-                   , xNumTicks: 16
-                   , yNumTicks: 5
-                   , drawDots: true // option to add dots to lines
-                   , useTipsy: true
-                   , dot_radius: 2
-                   , min: ymin > 0 ? 0 : ymin - .5 * Math.abs(ymin - (ymax < 50 ? 55 : ymax + 5))
-                   , max: ymax < 50 ? 55 : ymax + 5
-                   , yAxisScale: d3.scale.linear().domain([(ymin > 0 ? 0 : ymin - .5 * Math.abs(ymin - (ymax < 50 ? 55 : ymax + 5))), (ymax < 50 ? 55 : ymax + 5)]).range([this.height - this.yMargin, 0 + this.yMargin])
-                 });
+             var non_stacked_line = new LineChart("#non_stacked_line", data, {
+                 width: width
+               , height: height
+               , xLeftMargin: xLeftMargin
+               , xRightMargin: xRightMargin
+               , yMargin: yMargin
+               , startX: startX
+               , endX: endX
+               , stacked: false
+               , fillShades: false
+               , fill: d3.scale.ordinal().range(['#77c5d5', '#ed8b00', '#78be20', '#f3d03e', '#d14124', '#0092bc'])
+               , xNumTicks: 16
+               , yNumTicks: 5
+               , drawDots: true // option to add dots to lines
+               , useTipsy: true
+               , dot_radius: 2
+               , min: ymin > 0 ? 0 : ymin - .5 * Math.abs(ymin - (ymax < 50 ? 55 : ymax + 5))
+               , max: ymax < 50 ? 55 : ymax + 5
+               , yAxisScale: d3.scale.linear().domain([(ymin > 0 ? 0 : ymin - .5 * Math.abs(ymin - (ymax < 50 ? 55 : ymax + 5))), (ymax < 50 ? 55 : ymax + 5)]).range([this.height - this.yMargin, 0 + this.yMargin])
+             });
 
-               </script>
+           </script>
+	 </div>
 
-            <h3>Most Recent Votes</h3>
-                <table>
-                    <tr>
-                        <td>Voter</td>
-                        <td>Vote Type</td>
-                    </tr>
-                    <% @votes.where(:hack_id => hack.id).each do |vote| %>
-                    <tr>
-
-                        <td><%= vote.direction %></td>
-                    </tr>
-                    <% end %>
-                </table>
-            <h3>Department</h3>
-                <ul>
-                    <% @departments.each do |department| %>
-                    <li><%= department %>: <%= hack.adj_department_score(hack,department) %></li>
-                    <% end %>
-                </ul>
-               
-    </div>
+	<div class="right-container">
+		<h3>Most Recent Votes</h3>
+		<p class="voter"> <% @votes.where(:hack_id => hack.id).each do |vote| %> &nbsp; &nbsp; <%= vote.direction %></p><% end %>
+<br />
+<h3>Department</h3>
+<p class="voter"><% @departments.each do |department| %>
+<li><%= department %>: <span id="dept-score"><%= hack.adj_department_score(hack,department) %></span></li><% end %> </p>
+<br />
+</div>
+</div>
 <% end %>
