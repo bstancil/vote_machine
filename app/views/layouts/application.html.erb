@@ -10,29 +10,11 @@
 </head>
 <body>
 <body class ='<%= controller.controller_name %>'>
-    <script type="text/javascript" data-app-id="iRO1xIby6RxhHh1qfU96w" src="https://assets.yammer.com/platform/yam.js"></script>
-    <span id="yammer-login"></span>
-    <script> yam.connect.loginButton('#yammer-login', function (resp) { if (resp.authResponse) { document.getElementById('yammer-login').innerHTML = 'Welcome to Yammer!'; } }); </script>
-  <div id="banner">
+
+ 
     <%= @page_title || "Green" %>
-  </div>
-  <div id="columns">
-    <div id="side">
-      <ul>
-        <li><%= link_to "Login", sessions_create_url %></li>
-        <li>You are logged in as <%= session[:voter_id] %>.</li>
-        <li>You are logged in as <%= session[:name] %>.</li>
-        <li><%= link_to "Voting Booth", booth_index_path %> </li>
-        <li><%= link_to "Admin View", admin_index_path %> </li>
-        <li><%= link_to "Votes", votes_path %></li>
-        <li><%= link_to "Hacks", hacks_path %></li>
-        <li><%= link_to "Voters", voters_path %></li>
-        <li><%= link_to "Logout", sessions_destroy_url %></li>
-      </ul>
-    </div>
-    <div id="main">
+  
       <%= yield %>
-    </div>
-  </div>
+
 </body>
 </html>
