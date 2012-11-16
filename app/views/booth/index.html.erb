@@ -2,6 +2,7 @@
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="/app/assets/javascripts/bootstrap.min.js"></script>
 <!-- Begin page content -->
+<% @hack.each do |hack| %>
 <div class="container">
       <div class="left-container">
         <div class="page-header">
@@ -13,14 +14,19 @@
 		<p align="center">
 		<button class="btn btn-large btn-success" type="button"><%= button_to 'I love it!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: 1) %></button>
 		&nbsp;&nbsp;<button class="btn btn-large btn-danger" type="button"><%= button_to 'Get off the stage!', votes_path(hack_id: hack.id, gen: hack.gen, department: @voter.department, direction: -1) %></button></p>
-		<div class="chart" id="non_stacked_line"></div>  
+           <div class="chart" id="non_stacked_line"></div>  
            <script type="text/javascript">
              
              var data = {  "contributors": <%= @vote_logs.select("id AS x,hack_score AS y").to_json.html_safe %>
                }               
 
+<<<<<<< HEAD
              var width = 690
                , height = 500
+=======
+             var width = 700
+               , height = 520
+>>>>>>> 9432f0b73f1404903c1947e974b24429db5aceb1
                , xLeftMargin = 100
                , xRightMargin = 50 
                , yMargin = 50
@@ -66,12 +72,24 @@
 
 	<div class="right-container">
 		<h3>Most Recent Votes</h3>
-		<p class="voter"> <% @votes.where(:hack_id => hack.id).each do |vote| %> &nbsp; &nbsp; <%= vote.direction %></p><% end %>
+		<% @votes.where(:hack_id => hack.id).each do |vote| %>
+		<p class="voter">  &nbsp; &nbsp; <%= vote.direction %></p>
+		<% end %>
 <br />
 <h3>Department</h3>
-<p class="voter"><% @departments.each do |department| %>
-<li><%= department %>: <span id="dept-score"><%= hack.adj_department_score(hack,department) %></span></li><% end %> </p>
+<% @departments.each do |department| %>
+<p class="voter">
+<li><%= department %>: <span id="dept-score"><%= hack.adj_department_score(hack,department) %></span></li></p>
+<% end %>
 <br />
+<div class="clearfloat"></div>
+      <div id="push"></div>
+    </div>
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">"I owe Stacy dinner, forever." -Benn Stancil</p>
+      </div>
+    </div>
 </div>
 </div>
 <% end %>
