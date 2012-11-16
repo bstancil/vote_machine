@@ -73,9 +73,9 @@
                , drawDots: true // option to add dots to lines
                , useTipsy: true
                , dot_radius: 5
-               , min: ymin
-               , max: ymax
-               , yAxisScale: d3.scale.linear().domain([ymin, ymax]).range([this.height - this.yMargin, 0 + this.yMargin])
+               , min: ymin > 0 ? 0 : ymin - .5 * Math.abs(ymin - (ymax < 50 ? 55 : ymax + 5))
+               , max: ymax < 50 ? 55 : ymax + 5
+               , yAxisScale: d3.scale.linear().domain([(ymin > 0 ? 0 : ymin - .5 * Math.abs(ymin - (ymax < 50 ? 55 : ymax + 5))), (ymax < 50 ? 55 : ymax + 5)]).range([this.height - this.yMargin, 0 + this.yMargin])
              });
 
            </script>
